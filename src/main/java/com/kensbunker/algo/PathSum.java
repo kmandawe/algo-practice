@@ -18,6 +18,7 @@ public class PathSum {
 
 
     public static void main(String[] args) {
+        MyNode node_1 = new MyNode(-1);
         MyNode node1 = new MyNode(1);
         MyNode node1_2 = new MyNode(1);
         MyNode node2 = new MyNode(2);
@@ -27,15 +28,18 @@ public class PathSum {
         MyNode node3 = new MyNode(3);
         MyNode node4 = new MyNode(4);
         MyNode node5 = new MyNode(5);
+        MyNode node5_2 = new MyNode(5);
         MyNode node6 = new MyNode(6);
         MyNode node7 = new MyNode(7);
 
-        node1.setChildren(Arrays.asList(null, node2));
-        node2.setParent(node1);
+        node5.setChildren(Arrays.asList(node5_2));
+        node5_2.setParent(node5);
 
-        node2.setChildren(Arrays.asList(node2_2, node5));
+        node5_2.setChildren(Arrays.asList(node1, node_1));
+        node1.setParent(node5_2);
+        node_1.setParent(node5_2);
 
         PathSum s = new PathSum();
-        System.out.println(s.hasPathSum(node1, 5));
+        System.out.println(s.hasPathSum(node5, 10));
     }
 }
