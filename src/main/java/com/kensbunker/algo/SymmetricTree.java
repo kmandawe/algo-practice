@@ -49,6 +49,6 @@ public class SymmetricTree {
         node2_4.setParent(node2_2);
 
         SymmetricTree s = new SymmetricTree();
-        System.out.println(s.isSymmetric(node2));
+        System.out.println(s.isSymmetric(node4));
     }
 }
