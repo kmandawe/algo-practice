@@ -28,15 +28,25 @@ public class SymmetricTree {
         MyNode node1 = new MyNode(1);
         MyNode node1_2 = new MyNode(1);
         MyNode node2 = new MyNode(2);
+        MyNode node2_2 = new MyNode(2);
+        MyNode node2_3 = new MyNode(2);
+        MyNode node2_4 = new MyNode(2);
         MyNode node3 = new MyNode(3);
         MyNode node4 = new MyNode(4);
         MyNode node5 = new MyNode(5);
         MyNode node6 = new MyNode(6);
         MyNode node7 = new MyNode(7);
 
-        node2.setChildren(Arrays.asList(node1, node1_2));
+        node4.setChildren(Arrays.asList(node2, node2_2));
+        node2.setParent(node4);
+        node2_2.setParent(node4);
+
+        node2.setChildren(Arrays.asList(node1, node2_3));
         node1.setParent(node2);
-        node1_2.setParent(node2);
+        node2_3.setParent(node2);
+
+        node2_2.setChildren(Arrays.asList(node2_4));
+        node2_4.setParent(node2_2);
 
         SymmetricTree s = new SymmetricTree();
         System.out.println(s.isSymmetric(node2));
