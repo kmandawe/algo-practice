@@ -1,77 +1,63 @@
 package com.kensbunker.algo;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
-import javax.swing.tree.TreeNode;
 
 public class ValidBinarySearchTreeBFS {
 
-  public boolean isValidBst(TreeNode node) {
-    if (node == null) {
-      return true;
+    public boolean isValidBst(TreeNode node) {
+        if (node == null) {
+            return true;
+        }
+        Queue<AugmentedNode> queue = new LinkedList<>();
+        queue.add(new AugmentedNode(node, Integer.MIN_VALUE, Integer.MAX_VALUE));
+
+        while (!queue.isEmpty()) {
+            AugmentedNode augmentedNode = queue.poll();
+            TreeNode<Integer> currentNode = augmentedNode.node;
+            if (currentNode.val < augmentedNode.min || currentNode.val > augmentedNode.max) {
+                return false;
+            }
+            TreeNode left = currentNode.left;
+            TreeNode right = currentNode.right;
+            if (left != null) {
+                queue.add(new AugmentedNode(left, augmentedNode.min, currentNode.val));
+            }
+            if (right != null) {
+                queue.add(new AugmentedNode(right, currentNode.val, augmentedNode.max));
+            }
+        }
+        return true;
     }
-    Queue<AugmentedNode> queue = new LinkedList<>();
-    queue.add(new AugmentedNode(node, Integer.MIN_VALUE, Integer.MAX_VALUE));
 
-    while (!queue.isEmpty()) {
-      AugmentedNode augmentedNode = queue.poll();
-      MyNode currentNode = (MyNode) augmentedNode.node;
-      if (currentNode.getValue() < augmentedNode.min || currentNode.getValue() > augmentedNode.max) {
-        return false;
-      }
-      TreeNode left = currentNode.getChildAt(0);
-      TreeNode right = currentNode.getChildAt(1);
-      if (left != null) {
-        queue.add(new AugmentedNode(left, augmentedNode.min, currentNode.getValue()));
-      }
-      if (right != null) {
-        queue.add(new AugmentedNode(right, currentNode.getValue(), augmentedNode.max));
-      }
+    private class AugmentedNode {
+        TreeNode node;
+        int min;
+        int max;
+
+        AugmentedNode(TreeNode node, int min, int max) {
+            this.node = node;
+            this.min = min;
+            this.max = max;
+        }
     }
-    return true;
-  }
 
-  private class AugmentedNode {
-    TreeNode node;
-    int min;
-    int max;
 
-    AugmentedNode(TreeNode node, int min, int max) {
-      this.node = node;
-      this.min = min;
-      this.max = max;
+    public static void main(String[] args) {
+        TreeNode node1 = new TreeNode(1);
+        TreeNode node2 = new TreeNode(2);
+        TreeNode node3 = new TreeNode(3);
+        TreeNode node4 = new TreeNode(4);
+        TreeNode node5 = new TreeNode(5);
+
+        node2.left = node1;
+        node2.right = node4;
+
+        node4.left = node3;
+        node4.right = node5;
+
+        ValidBinarySearchTreeBFS s = new ValidBinarySearchTreeBFS();
+        System.out.println(s.isValidBst(node2));
+
     }
-  }
-
-
-
-  public static void main(String[] args) {
-    MyNode node_1 = new MyNode(-1);
-    MyNode node1 = new MyNode(1);
-    MyNode node1_2 = new MyNode(1);
-    MyNode node2 = new MyNode(2);
-    MyNode node2_2 = new MyNode(2);
-    MyNode node2_3 = new MyNode(2);
-    MyNode node2_4 = new MyNode(2);
-    MyNode node3 = new MyNode(3);
-    MyNode node4 = new MyNode(4);
-    MyNode node5 = new MyNode(5);
-    MyNode node5_2 = new MyNode(5);
-    MyNode node6 = new MyNode(6);
-    MyNode node7 = new MyNode(7);
-
-    node2.setChildren(Arrays.asList(node1, node4));
-    node1.setParent(node2);
-    node4.setParent(node2);
-
-    node4.setChildren(Arrays.asList(node3, node5));
-    node3.setParent(node4);
-    node5.setParent(node4);
-
-    ValidBinarySearchTreeBFS s = new ValidBinarySearchTreeBFS();
-    System.out.println( s.isValidBst(node2));
-
-  }
 }

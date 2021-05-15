@@ -1,10 +1,5 @@
 package com.kensbunker.algo;
 
-import javax.swing.tree.TreeNode;
-import java.util.Arrays;
-import java.util.Enumeration;
-import java.util.List;
-
 public class BalancedTreeSolution {
     public boolean isBalanced(TreeNode root) {
         return checkIfBalanced(root).isBalanced();
@@ -15,12 +10,12 @@ public class BalancedTreeSolution {
             return new BalanceStatus(true, -1, -1);
         }
 
-        BalanceStatus leftStatus = checkIfBalanced(root.getChildAt(0));
+        BalanceStatus leftStatus = checkIfBalanced(root.left);
         if (!leftStatus.isBalanced()) {
             return leftStatus;
         }
 
-        BalanceStatus rightStatus = checkIfBalanced(root.getChildAt(1));
+        BalanceStatus rightStatus = checkIfBalanced(root.right);
         if (!rightStatus.isBalanced()) {
             return rightStatus;
         }
@@ -34,23 +29,22 @@ public class BalancedTreeSolution {
 
 
     public static void main(String[] args) {
-        MyNode node1 = new MyNode(1);
-        MyNode node2 = new MyNode(2);
-        MyNode node3 = new MyNode(3);
-        MyNode node4 = new MyNode(4);
-        MyNode node5 = new MyNode(5);
-        MyNode node6 = new MyNode(6);
 
-        node1.setChildren(Arrays.asList(node2, node3));
-        node2.setParent(node1);
-        node3.setParent(node1);
+        TreeNode node1 = new TreeNode(1);
+        TreeNode node2 = new TreeNode(2);
+        TreeNode node3 = new TreeNode(3);
+        TreeNode node4 = new TreeNode(4);
+        TreeNode node5 = new TreeNode(5);
+        TreeNode node6 = new TreeNode(6);
 
-        node3.setChildren(Arrays.asList(node4, node5));
-        node4.setParent(node3);
-        node5.setParent(node3);
 
-        node5.setChildren(Arrays.asList(node6));
-        node6.setParent(node5);
+        node1.left = node2;
+        node1.right = node3;
+
+        node3.left = node4;
+        node3.right = node5;
+
+        node5.left = node6;
 
         BalancedTreeSolution s = new BalancedTreeSolution();
         System.out.println(s.isBalanced(node1));

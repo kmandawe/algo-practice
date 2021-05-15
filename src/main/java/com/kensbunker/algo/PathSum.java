@@ -1,43 +1,30 @@
 package com.kensbunker.algo;
 
-import javax.swing.tree.TreeNode;
-import java.util.Arrays;
-
 public class PathSum {
-    public boolean hasPathSum(TreeNode root, int targetSum) {
+    public boolean hasPathSum(TreeNode<Integer> root, int targetSum) {
         if (root == null) {
             return false;
         }
-        boolean isLeaf = root.getChildAt(0) == null && root.getChildAt(1) == null;
-        if (isLeaf && targetSum - ((MyNode) root).getValue() == 0) {
+        boolean isLeaf = root.left == null && root.right == null;
+        if (isLeaf && targetSum - root.val == 0) {
             return true;
         }
-        return hasPathSum(root.getChildAt(0), targetSum - ((MyNode) root).getValue()) ||
-                hasPathSum(root.getChildAt(1), targetSum - ((MyNode) root).getValue());
+        return hasPathSum(root.left, targetSum - root.val) ||
+                hasPathSum(root.right, targetSum - root.val);
     }
 
 
     public static void main(String[] args) {
-        MyNode node_1 = new MyNode(-1);
-        MyNode node1 = new MyNode(1);
-        MyNode node1_2 = new MyNode(1);
-        MyNode node2 = new MyNode(2);
-        MyNode node2_2 = new MyNode(2);
-        MyNode node2_3 = new MyNode(2);
-        MyNode node2_4 = new MyNode(2);
-        MyNode node3 = new MyNode(3);
-        MyNode node4 = new MyNode(4);
-        MyNode node5 = new MyNode(5);
-        MyNode node5_2 = new MyNode(5);
-        MyNode node6 = new MyNode(6);
-        MyNode node7 = new MyNode(7);
 
-        node5.setChildren(Arrays.asList(node5_2));
-        node5_2.setParent(node5);
+        TreeNode node1 = new TreeNode(1);
+        TreeNode node_1 = new TreeNode(-1);
+        TreeNode node5 = new TreeNode(5);
+        TreeNode node5_2 = new TreeNode(5);
 
-        node5_2.setChildren(Arrays.asList(node1, node_1));
-        node1.setParent(node5_2);
-        node_1.setParent(node5_2);
+        node5.left = node5_2;
+
+        node5_2.left = node1;
+        node5_2.right = node_1;
 
         PathSum s = new PathSum();
         System.out.println(s.hasPathSum(node5, 10));
