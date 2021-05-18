@@ -1,4 +1,4 @@
-package com.kensbunker.algo;
+package com.kensbunker.algo.trees;
 
 public class BinaryTreeLongestPath {
     public int maxDiameter(TreeNode<Integer> root) {

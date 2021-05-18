@@ -1,4 +1,4 @@
-package com.kensbunker.algo;
+package com.kensbunker.algo.trees;
 
 import java.util.Arrays;
 import java.util.LinkedList;

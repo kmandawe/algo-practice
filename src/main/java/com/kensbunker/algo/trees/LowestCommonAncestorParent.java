@@ -1,4 +1,4 @@
-package com.kensbunker.algo;
+package com.kensbunker.algo.trees;
 
 import java.util.HashMap;
 import java.util.Map;

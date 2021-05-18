@@ -1,4 +1,4 @@
-package com.kensbunker.algo;
+package com.kensbunker.algo.trees;
 
 public class TreeNode<T> {
     T val;
