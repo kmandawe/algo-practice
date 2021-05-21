@@ -1,12 +1,12 @@
 package com.kensbunker.algo.trees;
 
 public class TreeNode<T> {
-    T val;
-    TreeNode<T> left;
-    TreeNode<T> right;
-    TreeNode<T> parent;
+    public T val;
+    public TreeNode<T> left;
+    public TreeNode<T> right;
+    public TreeNode<T> parent;
 
-    TreeNode(T val) {
+    public TreeNode(T val) {
         this.val = val;
     }
 }
